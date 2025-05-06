@@ -1,5 +1,4 @@
-﻿// Controllers/AdminPanel.cs
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using domain.UseCase;
 using data.RemoteData.RemoteDatabase.DAO;
 
@@ -23,7 +22,6 @@ namespace PresenceDesktop.API
             _presenceUseCase = presenceUc;
         }
 
-        // POST api/group
         [HttpPost("group")]
         public IActionResult AddGroup([FromBody] AddGroupRequest req)
         {
@@ -44,7 +42,6 @@ namespace PresenceDesktop.API
         [HttpPost("group/{groupId:int}/students")]
         public IActionResult AddStudents(int groupId, [FromBody] StudentsRequest req)
         {
-            // Для каждого ID меняем у пользователя поле GroupId
             foreach (var studentId in req.Students)
             {
                 var user = _userUseCase.FindUserByUserId(studentId);
@@ -68,7 +65,6 @@ namespace PresenceDesktop.API
             return Ok(list);
         }
 
-        // DELETE api/presence or api/presence?group=2
         [HttpDelete("presence")]
         public IActionResult DeletePresence([FromQuery] int? group)
         {
@@ -80,11 +76,9 @@ namespace PresenceDesktop.API
             return NoContent();
         }
 
-        // POST api/presence
         [HttpPost("presence")]
         public IActionResult CreatePresence([FromBody] List<CreatePresenceRequest> items)
         {
-            // Мапим входящие DTO в DAO
             var presences = items.Select(i => new PresenceDAO
             {
                 Date = DateOnly.FromDateTime(i.Date),
@@ -97,14 +91,12 @@ namespace PresenceDesktop.API
             return Ok();
         }
 
-        // PUT api/presence
         [HttpPut("presence")]
         public IActionResult UpdatePresence([FromBody] List<UpdatePresenceRequest> items)
         {
             foreach (var u in items)
             {
                 var d = DateOnly.FromDateTime(u.Date);
-                // Здесь мы просто перезаписываем флаг присутствия
                 _presenceUseCase.UpdatePresence(d, u.StudentId, u.GroupId, u.LessonNumber, u.NewTypeAttendance);
             }
             return Ok();

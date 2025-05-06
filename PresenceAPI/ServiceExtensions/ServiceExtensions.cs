@@ -28,10 +28,8 @@ public static class ServiceExtensions
 
     public static void ConfigurateAdminPanel(this IServiceCollection services)
     {
-        // Регистрируем репозитории
         services.ConfigurateRepositories();
         
-        // Регистрируем UseCase
         services.AddScoped<GroupUseCase>();
         services.AddScoped<UserUseCase>();
         services.AddScoped<PresenceUseCase>();

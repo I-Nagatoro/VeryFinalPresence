@@ -56,7 +56,6 @@ public class PresenceConsoleUI
         {
             try
             {
-                // Получаем все посещения для группы
                 var presences = _presenceUseCase.GetAllPresenceByGroup(groupId);
 
                 if (presences == null || presences.Count == 0)
@@ -65,7 +64,6 @@ public class PresenceConsoleUI
                     return;
                 }
 
-                // Группируем по дате
                 var groupedPresences = presences.GroupBy(p => p.Date);
 
                 foreach (var group in groupedPresences)
@@ -74,19 +72,16 @@ public class PresenceConsoleUI
                     Console.WriteLine($"Дата: {group.Key.ToString("dd.MM.yyyy")}");
                     Console.WriteLine("===================================================");
 
-                    // Группируем по занятию
                     var groupedByLesson = group.GroupBy(p => p.LessonNumber);
 
                     foreach (var lessonGroup in groupedByLesson)
                     {
                         Console.WriteLine($"Занятие {lessonGroup.Key}:");
 
-                        // Создаем HashSet для уникальных пользователей
                         var userIds = new HashSet<int>();
 
                         foreach (var presence in lessonGroup)
                         {
-                            // Проверяем, добавляется ли пользователь в HashSet
                             if (userIds.Add(presence.UserId))
                             {
                                 string status = presence.IsAttendance ? "Присутствует" : "Отсутствует";

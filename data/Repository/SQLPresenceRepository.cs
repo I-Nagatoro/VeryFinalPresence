@@ -171,7 +171,6 @@ public class SQLPresenceRepository : IPresenceRepository
     public void UpdateAbsent(int userId, int groupId, int firstLesson, int lastLesson, DateOnly date,
         bool isAttendance)
     {
-        // Находим все записи по UserId, GroupId, LessonNumber (в диапазоне) и дате
         var presences = _context.presences
             .Where(p => p.UserId == userId
                         && p.GroupId == groupId
@@ -180,13 +179,12 @@ public class SQLPresenceRepository : IPresenceRepository
                         && p.Date == date)
             .ToList();
 
-        // Обновляем значение IsAttendance для всех найденных записей
         foreach (var presence in presences)
         {
             presence.IsAttendance = isAttendance;
         }
 
-        _context.SaveChanges(); // Сохраняем изменения в базе данных
+        _context.SaveChanges();
     }
     
     public List<PresenceDAO> GetPresenceByDateGroupAndUser(DateOnly date, int groupId, int userId)

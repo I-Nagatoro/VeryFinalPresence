@@ -51,12 +51,10 @@ public class PresenceUseCase
         List<PresenceDAO> presences = _presenceRepository.GetPresenceByDateGroupAndUser(date, groupId,userId);
         if (presences.Where(p => p.UserId == userId).Count() > 0)
         {
-            // Обновляем состояние присутствия для указанных занятий
             foreach (var presence in presences.Where(p => p.UserId == userId && p.LessonNumber >= firstLesson && p.LessonNumber <= lastLesson))
             { 
-                presence.IsAttendance = false; // Устанавливаем отсутствие
+                presence.IsAttendance = false;
             }
-            // Сохраняем изменения в репозитории
             _presenceRepository.UpdateAbsent(userId, groupId, firstLesson, lastLesson, date, false);
             return true;
         }
@@ -116,7 +114,6 @@ public class PresenceUseCase
         string reportsFolderPath = Path.Combine(projectDirectory, "Reports");
         string filePath = Path.Combine(reportsFolderPath, "AttendanceReport.xlsx");
 
-        // Создаем папку, если она не существует
         if (!Directory.Exists(reportsFolderPath))
         {
             Directory.CreateDirectory(reportsFolderPath);

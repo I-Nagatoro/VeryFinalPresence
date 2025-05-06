@@ -230,7 +230,7 @@ namespace ui
             Console.WriteLine($"\nПосещаемость на {date.ToShortDateString()} для группы с ID {groupId}:");
             Console.WriteLine("---------------------------------------------");
 
-            int previousLessonNumber = -1; // Инициализация для сравнения
+            int previousLessonNumber = -1;
             foreach (var presence in sortedPresences)
             {
                 if (previousLessonNumber != presence.LessonNumber)

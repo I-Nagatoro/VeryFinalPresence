@@ -45,7 +45,7 @@ app.MapControllers();
 
 app.Run();
 
-// Middleware для логирования ошибок
+
 public class ErrorLoggingMiddleware
 {
     private readonly RequestDelegate _next;

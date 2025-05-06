@@ -1,0 +1,14 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="PresenceDesktop.MainWindow"
+        Title="Presence — Главное окно"
+        Width="800" Height="600"
+        WindowStartupLocation="CenterScreen">
+
+    <StackPanel Margin="40" Spacing="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="Добро пожаловать!" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+        <Button Name="BtnOpenGroups" Content="Группы" Width="200" Height="40"/>
+        <Button Name="BtnOpenStudents" Content="Студенты" Width="200" Height="40"/>
+        <Button Name="BtnOpenAttendance" Content="Посещаемость" Width="200" Height="40"/>
+    </StackPanel>
+</Window>

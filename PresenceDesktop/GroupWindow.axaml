@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="PresenceDesktop.GroupsWindow"
+        x:CompileBindings="False"
+        Title="Группы" Width="600" Height="550"
+        WindowStartupLocation="CenterOwner">
+
+    <StackPanel Margin="20" Spacing="10">
+        <ComboBox Name="GroupComboBox" Width="300" HorizontalAlignment="Left">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <ListBox Name="UsersList" Height="350">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding FIO}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Редактировать" Click="EditUser_Click"/>
+                    <MenuItem Header="Удалить" Click="DeleteUser_Click"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
+
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <Button Name="BtnAddUser" Content="Добавить студента" Width="150" Click="BtnAddUser_Click"/>
+            <Button Name="BtnRefresh" Content="Обновить" Width="100"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

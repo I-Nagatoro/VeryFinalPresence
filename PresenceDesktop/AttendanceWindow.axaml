@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="PresenceDesktop.AttendanceWindow"
+        x:CompileBindings="False"
+        Title="Посещаемость"
+        Width="800" Height="600"
+        WindowStartupLocation="CenterOwner">
+
+    <StackPanel Margin="20" Spacing="10">
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <ComboBox Name="GroupComboBox" Width="250">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <DatePicker Name="DatePicker" SelectedDate="{x:Null}"/>
+        </StackPanel>
+
+        <ListBox Name="AttendanceList" Height="450" />
+    </StackPanel>
+</Window>
